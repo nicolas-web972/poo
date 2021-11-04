@@ -4,14 +4,17 @@ require_once 'Vehicle.php';
 
 class Car extends Vehicle
 {
-    private string $energy;
-    private int $energyLevel;
-
     public const ALLOWED_ENERGIES = [
         'fuel',
         'electric',
     ];
 
+    private string $energy;
+    private int $energyLevel;
+
+    private bool $hasParkBrake = false;
+
+  
     public function __construct(string $color, int $nbSeats, string $energy)
     {
         $this->color = $color;
@@ -35,15 +38,40 @@ class Car extends Vehicle
     }
 
     public function setEnergy(string $energy): Car
-{
+    {
     if (in_array($energy, self::ALLOWED_ENERGIES)) 
     {
         $this->energy = $energy;
     }
 
     return $this;
-    var_dump(Car::ALLOWED_ENERGIES);
+    var_dump(Car::ALLOWED_ENERGIES); 
+    }
+
+    public function getParkBrake(): bool
+    {
+        return $this->hasParkBrake;
+    }
+
+    public function setParkBrake(): void
+    {
+        if ($this->hasParkBrake) {
+            $this->hasParkBrake = false;
+        } else {
+            $this->hasParkBrake = true;
+        }
+    }
+
+    public function start(): string
+    {
+        if ($this->hasParkBrake) {
+            throw new LogicException("Frein à main activé");
+        }
+        $this->currentSpeed = 0;
+
+        return 'Pret à partir';
+    }
 
 }
-}
+
 

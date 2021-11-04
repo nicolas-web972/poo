@@ -71,3 +71,12 @@ echo "<br>";
 $pedestrianWay->addVehicle($car);
 var_dump($pedestrianWay->getCurrentVehicles());
 echo "<br>";
+
+try {
+    $car->start();
+} catch (LogicException $e) {
+    $car->setParkBrake();
+} finally {
+    echo "Ma voiture roule comme un donut";
+}
+var_dump($car->getParkBrake());
