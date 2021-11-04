@@ -1,82 +1,77 @@
 <?php
 
+require_once 'Vehicle.php';
 
-//propriétés
-
-class Car
+class Car extends Vehicle
 {
-    private int $nbWheels;
-    private int $currentSpeed;
-    private string $color;
-    private int $nbSeats;
+    public const ALLOWED_ENERGIES = [
+        'fuel',
+        'electric',
+    ];
+
     private string $energy;
     private int $energyLevel;
 
+    private bool $hasParkBrake = false;
 
-    //construct
-public function __construct(string $color, int $nbSeats, string $energy)
-{
-    $this->color = $color;
-    $this->nbSeats = $nbSeats;
-    $this->energy = $energy;
-}
+  
+    public function __construct(string $color, int $nbSeats, string $energy)
+    {
+        $this->color = $color;
+        $this->nbSeats = $nbSeats;
+        $this->energy = $energy;
+    }
 
-    //methods
+    public function getEnergy(): string
+    {
+        return $this->energy;
+    }
 
-public function getColor(): string
-{
-    return $this->color;
-}
+    public function getEnergyLevel(): int
+    {
+        return $this->energyLevel;
+    }
 
-public function setColor(string $color): void
-{
-     $this->color= $color;
-}
+    public function setEnergyLevel(int $energyLevel): void
+    {
+        $this->energyLevel = $energyLevel;
+    }
 
-public function getCurrentSpeed(): int
-{
-    return $this->currentSpeed;
-}
+    public function setEnergy(string $energy): Car
+    {
+    if (in_array($energy, self::ALLOWED_ENERGIES)) 
+    {
+        $this->energy = $energy;
+    }
 
-public function setCurrentSpeed(int $currentSpeed): void
-{
-    $this->CurrentSpeed;
-}
+    return $this;
+    var_dump(Car::ALLOWED_ENERGIES); 
+    }
 
-public function getenergyLevel():int
-{
-    return $this -> energyLevel;
-}
-public function setEnergyLevel(int $energyLevel): void
-{
-    $this->energyLevel = $energyLevel;
-}
+    public function getParkBrake(): bool
+    {
+        return $this->hasParkBrake;
+    }
 
-public function start(): string 
-{
-    $this -> currentSpeed = 0;
-    return "Start !";
+    public function setParkBrake(): void
+    {
+        if ($this->hasParkBrake) {
+            $this->hasParkBrake = false;
+        } else {
+            $this->hasParkBrake = true;
+        }
+    }
 
-}
+    public function start(): string
+    {
+        if ($this->hasParkBrake) {
+            throw new LogicException("Frein à main activé");
+        }
+        $this->currentSpeed = 0;
 
-public function forward(): string
-{
-    $this->currentSpeed = 15;
-
-    return "Go !";
-}
-
-public function brake(): string
-{
-   $sentence = "";
-   while ($this->currentSpeed > 0) {
-       $this->currentSpeed--;
-       $sentence .= "Brake !!!";
-   }
-   $sentence .= "I'm stopped !";
-   return $sentence;
-}
-
+        return 'Pret à partir';
+    }
 
 }
-?>
+
+
