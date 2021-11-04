@@ -68,6 +68,7 @@ class Truck extends Vehicle
         } else {
             $sentence .= "Full.";
         }
+        
         return $sentence;
     }
 }

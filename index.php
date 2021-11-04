@@ -5,6 +5,10 @@ require_once 'Bicycle.php';
 require_once 'Car.php';
 require_once 'Vehicle.php';
 require_once 'Truck.php';
+require_once 'MotorWay.php';
+require_once 'PedestrianWay.php';
+require_once 'ResidentialWay.php';
+require_once 'Skateboard.php';
 
 $bicycle = new Bicycle('blue', 1);
 echo $bicycle->forward();
@@ -14,7 +18,7 @@ echo '<br/>';
 $car = new Car('green', 4, 'electric');
 echo $car->forward();
 var_dump($car);
-
+echo '<br>';
 
 // CHALLENGE 1
 echo '<br>';
@@ -30,6 +34,7 @@ echo '<br>';
 //echo 'Vitesse de la voiture : ' . $car->getCurrentSpeed() . ' km/h' . '<br>';
 echo '<br>';
 
+//CHALLENGE2
 $truck = new Truck('orange', 3, 'fuel', 30);
 $truck -> setLoading(20);
 echo $truck -> isFull();
@@ -45,3 +50,24 @@ echo $truck->forward();
 echo $truck->brake();
 echo '<br>';
 var_dump($truck);
+
+$skate = new Skateboard('grey', 0);
+$motorWay = new MotorWay();
+$pedestrianWay = new PedestrianWay();
+$residentialWay = new ResidentialWay();
+
+$motorWay->addVehicle($car);
+var_dump($motorWay->getCurrentVehicles());
+echo "<br>";
+
+$pedestrianWay->addVehicle($bicycle);
+var_dump($pedestrianWay->getCurrentVehicles());
+echo "<br>";
+
+$pedestrianWay->addVehicle($skate);
+var_dump($pedestrianWay->getCurrentVehicles());
+echo "<br>";
+
+$pedestrianWay->addVehicle($car);
+var_dump($pedestrianWay->getCurrentVehicles());
+echo "<br>";
