@@ -36,18 +36,7 @@ class Car extends Vehicle
     {
         $this->energyLevel = $energyLevel;
     }
-
-    public function setEnergy(string $energy): Car
-    {
-    if (in_array($energy, self::ALLOWED_ENERGIES)) 
-    {
-        $this->energy = $energy;
-    }
-
-    return $this;
-    var_dump(Car::ALLOWED_ENERGIES); 
-    }
-
+    
     public function getParkBrake(): bool
     {
         return $this->hasParkBrake;
@@ -70,6 +59,16 @@ class Car extends Vehicle
         $this->currentSpeed = 0;
 
         return 'Pret à partir';
+    }
+
+    public function switchOn(): bool
+    {
+        return true;
+    }
+
+    public function switchOff(): bool
+    {
+        return false;
     }
 
 }
