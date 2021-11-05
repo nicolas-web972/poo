@@ -9,6 +9,8 @@ require_once 'MotorWay.php';
 require_once 'PedestrianWay.php';
 require_once 'ResidentialWay.php';
 require_once 'Skateboard.php';
+require_once 'Speedometer.php';
+
 
 $bicycle = new Bicycle('blue', 1);
 echo $bicycle->forward();
@@ -80,3 +82,6 @@ try {
     echo "Ma voiture roule comme un donut";
 }
 var_dump($car->getParkBrake());
+
+// Challenge6
+echo "10km => " . Speedometer::convertKmToMiles(10) . "miles\n";
